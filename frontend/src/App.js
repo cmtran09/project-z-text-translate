@@ -8,12 +8,15 @@ import "@babel/polyfill"
 
 const App = () => {
 
-  const [text, setText] = useState()
+  const [data, setData] = useState({
+    message: "",
+    test: "beans"
+  })
   const [error, setError] = useState()
 
   function handleChange(e) {
-    setText(e.target.value)
-    console.log(text)
+    setData({ ...data, [e.target.name]: e.target.value })
+    console.log(data)
   }
 
   function handleSubmit(e) {
@@ -27,10 +30,10 @@ const App = () => {
     <div className="">
       <h1>Hello mate</h1>
       <form onSubmit={e => handleSubmit(e)}>
-        <input onChange={handleChange} type="text" />
-        <button >submit</button>
+        <input name="message" onChange={handleChange} type="text" />
+        <button>submit</button>
       </form>
-      <button onClick={e => console.log(text)}>log</button>
+      <button onClick={e => console.log(data)}>log</button>
     </div>
   )
 }
