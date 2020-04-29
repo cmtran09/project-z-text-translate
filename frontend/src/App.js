@@ -21,7 +21,7 @@ const App = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    axios.get("/api/books")
+    axios.post("/api/text", data)
       .then(res => console.log(res))
       .catch(err => setError(err))
   }
