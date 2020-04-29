@@ -26,9 +26,15 @@ module.exports = {
 		contentBase: path.resolve('src'),
 		hot: true,
 		open: true,
-		port: 8002,
+		port: 8000,
 		watchContentBase: true,
-		historyApiFallback: true
+		historyApiFallback: true,
+		proxy: {
+			'api': {
+				target: 'http://localhost:5000',
+				secure: false
+			}
+		}
 	},
 	plugins: [
 		new Dotenv(),
