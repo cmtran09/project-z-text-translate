@@ -18,7 +18,7 @@ const App = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    axios.get("http://localhost:5000/api/books")
+    axios.get("/api/books")
       .then(res => console.log(res))
       .catch(err => setError(err))
   }
