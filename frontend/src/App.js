@@ -84,27 +84,19 @@ const App = () => {
       <button onClick={e => console.log(value)}>check</button>
 
       <Form>
-        <Form.Field>
-          Selected value: <b>{value.radioGroup}</b>
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Choose this'
-            name='radioGroup'
-            value='this'
-            checked={value === 'this'}
-            onChange={handle}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Or that'
-            name='radioGroup'
-            value='that'
-            checked={value === 'that'}
-            onChange={handle}
-          />
-        </Form.Field>
+        <Form.Input
+          placeholder='Enter Phone Number Including +44'
+          name='number'
+          onChange={handle}
+          label="Phone Number"
+        />
+        <Form.Input
+          placeholder='Enter Your Message'
+          name='message'
+          onChange={handle}
+          label="Message"
+        />
+        <Dropdown onChange={handle} name='language' placeholder='select language' options={options} selection />
       </Form>
 
       <p className="cmtran09head">
