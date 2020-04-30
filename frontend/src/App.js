@@ -11,6 +11,7 @@ const App = () => {
   const [data, setData] = useState({
     message: "",
     language: "",
+    number: "",
     test: "beans"
   })
   const [languages, setLanguages] = useState([])
@@ -31,7 +32,10 @@ const App = () => {
     e.preventDefault()
     axios.post("/api/text", data)
       .then(res => console.log(res))
-      .catch(err => setError(err))
+      .catch(err => {
+        setError(err)
+        console.log("eror")
+      })
   }
 
 
@@ -41,7 +45,10 @@ const App = () => {
     <div className="">
       <h1>Hello mate</h1>
       <form onSubmit={e => handleSubmit(e)}>
-        <input name="message" onChange={e=> handleChange(e)} type="text" />
+        <label htmlFor="message">message</label>
+        <input name="message" onChange={e => handleChange(e)} type="text" />
+        <label htmlFor="number">number</label>
+        <input name="number" onChange={e => handleChange(e)} type="text" />
         <select name='language' onChange={e => handleChange(e)}>
           <option>Select language</option>
           {languagesList.map((elem, id) => {
@@ -57,6 +64,7 @@ const App = () => {
       <button onClick={e => console.log(data)}>log</button>
       <button onClick={e => console.log(languages)}>languages</button>
       <button onClick={e => console.log(languagesList)}>languages</button>
+      <button onClick={e => console.log(error)}>er</button>
     </div>
   )
 }
