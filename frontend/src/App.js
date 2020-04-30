@@ -16,20 +16,19 @@ const App = () => {
     number: "",
     test: "beans"
   })
-  const [languages, setLanguages] = useState([])
+  const [languages, setLanguages] = useState()
   const [error, setError] = useState()
 
+  const options = []
+
   useEffect(() => {
-    const key = 'trnsl.1.1.20191202T095947Z.54175132da211fc1.7560318e65d14be6fcc297876ea8f7cb07e89154'
-    axios.get(`https://translate.yandex.net/api/v1.5/tr.json/getLangs?key=${key}`)
-      .then(resp => setLanguages(resp.data.dirs))
+    const key = 'trnsl.1.1.20200430T193714Z.38528beeb497af85.ccc8582dffab7fb59f5232f80c022fe83f128e44'
+    axios.get(`https://translate.yandex.net/api/v1.5/tr.json/getLangs?ui=en&key=${key}`)
+      .then(resp => setLanguages(resp.data))
   }, [])
 
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value })
-    console.log("name", e.target.name)
-    console.log("val", e.target.value)
-    console.log(data)
   }
 
   function handleSubmit(e) {
@@ -42,26 +41,46 @@ const App = () => {
       })
   }
 
+  if (languages) {
+    console.log(languages)
+    console.log("dirs", languages.dirs[0])
+    const languagesList = languages.dirs.filter(language => language.startsWith('en'))
+    console.log("languagesList", languagesList)
 
-  const languagesList = languages.filter(language => language.startsWith('uk'))
-
-  const options = []
-
-  // parse for option list
-  languagesList.map((elem, i) => {
-    options.push({
-      key: i,
-      text: elem.slice(-2).toUpperCase(),
-      value: elem.slice(-2),
-      name: 'language'
+    // parse for option list
+    languagesList.map((elem, i) => {
+      const abrev = elem => elem.slice(-2)
+      options.push({
+        key: i,
+        // matches language abrev to full name :)
+        text: `${abrev(elem).toUpperCase()} - ${languages.langs[abrev(elem)]}`,
+        value: elem.slice(-2),
+        name: 'language'
+      })
     })
-  })
-
-  if (options[3]) {
-    options[3].disabled = true
+    // const languagesList = languages.filter(language => language.startsWith('en'))
   }
 
-  console.log(options)
+
+  // const languagesList = languages.filter(language => language.startsWith('en'))
+
+  // const options = []
+
+  // // parse for option list
+  // languagesList.map((elem, i) => {
+  //   options.push({
+  //     key: i,
+  //     text: elem.slice(-2).toUpperCase(),
+  //     value: elem.slice(-2),
+  //     name: 'language'
+  //   })
+  // })
+
+  // if (options[3]) {
+  //   options[3].disabled = true
+  // }
+
+  // console.log(options)
 
   const [value, setValue] = useState({
     radioGroup: "null",
@@ -96,7 +115,10 @@ const App = () => {
           onChange={handle}
           label="Message"
         />
+
+
         <Dropdown onChange={handle} name='language' placeholder='select language' options={options} selection />
+
       </Form>
 
       <p className="cmtran09head">
@@ -108,7 +130,7 @@ const App = () => {
         <label htmlFor="number">number</label>
         <input name="number" onChange={e => handleChange(e)} type="text" />
 
-        <select name='language' onChange={e => handleChange(e)}>
+        {/* <select name='language' onChange={e => handleChange(e)}>
           <option>Select language</option>
           {languagesList.map((elem, id) => {
             return (
@@ -117,7 +139,7 @@ const App = () => {
               </option>
             )
           })}
-        </select>
+        </select> */}
 
         <Dropdown onChange={handle} name='language' placeholder='select language' options={options} selection />
 
