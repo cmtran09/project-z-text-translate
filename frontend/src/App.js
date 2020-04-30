@@ -33,7 +33,8 @@ const App = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    axios.post("/api/text", data)
+    console.log(value)
+    axios.post("/api/text", value)
       .then(res => console.log(res))
       .catch(err => {
         setError(err)
@@ -102,7 +103,7 @@ const App = () => {
     <div className="main-app">
       <button onClick={e => console.log(value)}>check</button>
 
-      <Form>
+      <Form onSubmit={e => handleSubmit(e)} >
         <Form.Input
           placeholder='Enter Phone Number Including +44'
           name='number'
@@ -115,10 +116,8 @@ const App = () => {
           onChange={handle}
           label="Message"
         />
-
-
         <Dropdown onChange={handle} name='language' placeholder='select language' options={options} selection />
-
+        <Button type='submit'>Submit</Button>
       </Form>
 
       <p className="cmtran09head">
