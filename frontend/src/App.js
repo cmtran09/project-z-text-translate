@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 import axios from "axios"
 
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Dropdown, Radio } from 'semantic-ui-react'
 
 import "./styles/styles.scss"
 
@@ -27,6 +27,8 @@ const App = () => {
 
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value })
+    console.log("name", e.target.name)
+    console.log("val", e.target.value)
     console.log(data)
   }
 
@@ -43,14 +45,77 @@ const App = () => {
 
   const languagesList = languages.filter(language => language.startsWith('uk'))
 
+  const options = []
+
+  // parse for option list
+  languagesList.map((elem, i) => {
+    options.push({
+      key: i,
+      text: elem.slice(-2).toUpperCase(),
+      value: elem.slice(-2),
+      name: 'language'
+    })
+  })
+
+  if (options[3]) {
+    options[3].disabled = true
+  }
+
+  console.log(options)
+
+  const [value, setValue] = useState({
+    radioGroup: "null",
+    test: 123
+  })
+
+
+  function handle(e, data) {
+    // setData({ ...data, [e.target.name]: e.target.value })
+    setValue({ ...value, [data.name]: data.value })
+    // console.log("name", data.name)
+    // console.log("val", data.value)
+    console.log(value)
+    // setValue(value)
+    console.log(value)
+  }
+
   return (
-    <div className="">
-      <h1>Hello mate</h1>
+    <div className="main-app">
+      <button onClick={e => console.log(value)}>check</button>
+
+      <Form>
+        <Form.Field>
+          Selected value: <b>{value.radioGroup}</b>
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Choose this'
+            name='radioGroup'
+            value='this'
+            checked={value === 'this'}
+            onChange={handle}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Radio
+            label='Or that'
+            name='radioGroup'
+            value='that'
+            checked={value === 'that'}
+            onChange={handle}
+          />
+        </Form.Field>
+      </Form>
+
+      <p className="cmtran09head">
+        Project Z - Text Translate
+      </p>
       <form onSubmit={e => handleSubmit(e)}>
         <label htmlFor="message">message</label>
         <input name="message" onChange={e => handleChange(e)} type="text" />
         <label htmlFor="number">number</label>
         <input name="number" onChange={e => handleChange(e)} type="text" />
+
         <select name='language' onChange={e => handleChange(e)}>
           <option>Select language</option>
           {languagesList.map((elem, id) => {
@@ -61,6 +126,9 @@ const App = () => {
             )
           })}
         </select>
+
+        <Dropdown onChange={handle} name='language' placeholder='select language' options={options} selection />
+
         <button>submit</button>
       </form>
       <button onClick={e => console.log(data)}>log</button>
