@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 import axios from "axios"
 
+import { Grid, Image } from 'semantic-ui-react'
+
 import "./styles/styles.scss"
 
 import "@babel/polyfill"
