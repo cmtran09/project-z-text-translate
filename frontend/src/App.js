@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 import axios from "axios"
 
-import { Grid, Image } from 'semantic-ui-react'
+import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 import "./styles/styles.scss"
 
@@ -67,6 +67,20 @@ const App = () => {
       <button onClick={e => console.log(languages)}>languages</button>
       <button onClick={e => console.log(languagesList)}>languages</button>
       <button onClick={e => console.log(error)}>er</button>
+      <Form>
+        <Form.Field>
+          <label>First Name</label>
+          <input placeholder='First Name' />
+        </Form.Field>
+        <Form.Field>
+          <label>Last Name</label>
+          <input placeholder='Last Name' />
+        </Form.Field>
+        <Form.Field>
+          <Checkbox label='I agree to the Terms and Conditions' />
+        </Form.Field>
+        <Button type='submit'>Submit</Button>
+      </Form>
     </div>
   )
 }
