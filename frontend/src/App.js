@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
-import { Button, Checkbox, Form, Dropdown, Radio } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Dropdown, Radio, Grid, Segment } from 'semantic-ui-react'
 
 import './styles/styles.scss'
 
@@ -11,6 +11,7 @@ const App = () => {
   const [requestData, setRequestData] = useState({})
   const [languages, setLanguages] = useState()
   const [error, setError] = useState()
+  const [sentMessages, setSentMessages] = useState([])
   const options = []
 
   useEffect(() => {
@@ -22,23 +23,24 @@ const App = () => {
   function handleSubmit(e) {
     e.preventDefault()
     axios.post('/api/text', requestData)
-      .then(() => console.log('SMS successfully sent'))
+      .then((response) => {
+        setSentMessages(sentMessages=>[...sentMessages, response.data])
+        console.log(response.data)
+      })
       .catch(err => {
         setError({ errors: err.response })
         console.log(error)
       })
   }
 
+  
   function handleChange(e, data) {
     setRequestData({ ...requestData, [data.name]: data.value })
-    console.log(requestData)
+    setError()
   }
 
   if (languages) {
-    console.log(languages)
-    console.log("dirs", languages.dirs[0])
     const languagesList = languages.dirs.filter(language => language.startsWith('en'))
-    console.log("languagesList", languagesList)
 
     // parse for option list
     languagesList.map((elem, i) => {
@@ -55,22 +57,49 @@ const App = () => {
 
   return (
     <div>
-      <Form onSubmit={e => handleSubmit(e)} >
-        <Form.Input
-          placeholder='Enter Phone Number Including +44'
-          name='number'
-          onChange={handleChange}
-          label="Phone Number"
-        />
-        <Form.Input
-          placeholder='Enter yYour Message'
-          name='message'
-          onChange={handleChange}
-          label="Message"
-        />
-        <Dropdown onChange={handleChange} name='language' placeholder='select language' options={options} selection />
-        <Button type='submit'>Submit</Button>
-      </Form>
+      <p className="cmtran09head">
+        Project Z - Text Translate
+      </p>
+
+      <Grid columns={sentMessages.length < 1 ? 1 : 2} divided>
+        <Grid.Row stretched>
+          <Grid.Column>
+            <Segment>
+              <Form onSubmit={e => handleSubmit(e)} >
+                <Form.Input
+                  placeholder='Enter Phone Number'
+                  name='number'
+                  onChange={handleChange}
+                  label="Phone Number"
+                  error={error && { content: 'Please enter a valid UK phone number including +44', pointing: 'below' }}
+
+                />
+                <Form.Input
+                  placeholder='Enter Your Message'
+                  name='message'
+                  onChange={handleChange}
+                  label="Message"
+                />
+                <Dropdown onChange={handleChange} name='language' placeholder='select language' options={options} selection />
+                <Button type='submit'>Submit</Button>
+              </Form>
+            </Segment>
+          </Grid.Column>
+          {sentMessages.length > 0 &&
+            <Grid.Column>
+              {sentMessages.map((message, i) => {
+                return (
+                <Segment key={i}>
+                  <p>Sent at: {message.time_sent}</p>
+                  <p>Translated message sent: {message.sent_message.slice(38,message.sent_message.length)}</p>
+                </Segment>
+                )
+              })}
+            </Grid.Column>
+          }
+        </Grid.Row>
+        <button onClick={e=>console.log("error", error)}>click</button>
+      </Grid>
     </div>
   )
 }
