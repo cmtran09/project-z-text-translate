@@ -22,7 +22,7 @@ function translateAndText(req, res) {
 			client.lookups.phoneNumbers(number)
 				.fetch({ countryCode: 'GB' })
 				.then(phone_number => console.log(phone_number.phoneNumber))
-				.catch(err => res.status(400).json({ message: err }))
+				.catch(err => res.status(400).json({ number_lookup_message: err }))
 
 			client.messages
 				.create({
