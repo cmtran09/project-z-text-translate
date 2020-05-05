@@ -10,11 +10,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "webpack-dev-server --mode=development",
     "build": "webpack -p",
-    "deploy": "yarn build && gh-pages -d dist"
+    "deploy": "yarn build && gh-pages -d dist",
+    "start": "node ../backend/app.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
     "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
     "gh-pages": "^2.2.0",
     "react": "^16.13.1",

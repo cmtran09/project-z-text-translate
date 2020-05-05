@@ -24,7 +24,7 @@ const App = () => {
     e.preventDefault()
     axios.post('/api/text', requestData)
       .then((response) => {
-        setSentMessages(sentMessages=>[...sentMessages, response.data])
+        setSentMessages(sentMessages => [...sentMessages, response.data])
         console.log(response.data)
       })
       .catch(err => {
@@ -33,7 +33,6 @@ const App = () => {
       })
   }
 
-  
   function handleChange(e, data) {
     setRequestData({ ...requestData, [data.name]: data.value })
     setError()
@@ -61,45 +60,46 @@ const App = () => {
         Project Z - Text Translate
       </p>
 
-      <Grid columns={sentMessages.length < 1 ? 1 : 2} divided>
-        <Grid.Row stretched>
-          <Grid.Column>
-            <Segment>
-              <Form onSubmit={e => handleSubmit(e)} >
-                <Form.Input
-                  placeholder='Enter Phone Number'
-                  name='number'
-                  onChange={handleChange}
-                  label="Phone Number"
-                  error={error && { content: 'Please enter a valid UK phone number including +44', pointing: 'below' }}
-
-                />
-                <Form.Input
-                  placeholder='Enter Your Message'
-                  name='message'
-                  onChange={handleChange}
-                  label="Message"
-                />
-                <Dropdown onChange={handleChange} name='language' placeholder='select language' options={options} selection />
-                <Button type='submit'>Submit</Button>
-              </Form>
-            </Segment>
-          </Grid.Column>
-          {sentMessages.length > 0 &&
+      <div className="main-app">
+        <Grid columns={sentMessages.length < 1 ? 1 : 2} divided>
+          <Grid.Row stretched>
             <Grid.Column>
-              {sentMessages.map((message, i) => {
-                return (
-                <Segment key={i}>
-                  <p>Sent at: {message.time_sent}</p>
-                  <p>Translated message sent: {message.sent_message.slice(38,message.sent_message.length)}</p>
-                </Segment>
-                )
-              })}
+              <Segment>
+                <Form onSubmit={e => handleSubmit(e)} >
+                  <Form.Input
+                    placeholder='Enter Phone Number'
+                    name='number'
+                    onChange={handleChange}
+                    label="Phone Number"
+                    error={error && { content: 'Please enter a valid UK phone number including +44', pointing: 'below' }}
+
+                  />
+                  <Form.Input
+                    placeholder='Enter Your Message'
+                    name='message'
+                    onChange={handleChange}
+                    label="Message"
+                  />
+                  <Dropdown onChange={handleChange} name='language' placeholder='select language' options={options} selection />
+                  <Button type='submit'>Submit</Button>
+                </Form>
+              </Segment>
             </Grid.Column>
-          }
-        </Grid.Row>
-        <button onClick={e=>console.log("error", error)}>click</button>
-      </Grid>
+            {sentMessages.length > 0 &&
+              <Grid.Column>
+                {sentMessages.map((message, i) => {
+                  return (
+                    <Segment key={i}>
+                      <p>Sent at: {message.time_sent}</p>
+                      <p>Translated message sent: {message.sent_message.slice(38, message.sent_message.length)}</p>
+                    </Segment>
+                  )
+                })}
+              </Grid.Column>
+            }
+          </Grid.Row>
+        </Grid>
+      </div>
     </div>
   )
 }

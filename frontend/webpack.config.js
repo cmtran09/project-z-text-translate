@@ -7,7 +7,8 @@ module.exports = {
 	entry: './src/app.js',
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve('dist'),
+		path: path.resolve('./frontend/dist'),
+		publicPath: '/'
 		// publicPath: '/project-2-potterapi-pair/'
 	},
 	module: {
