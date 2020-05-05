@@ -2,6 +2,7 @@
   "name": "project-z-translate",
   "version": "1.0.0",
   "description": "",
+  "repository": "https://github.com/cmtran09/project-z-text-translate.git",
   "main": "index.js",
   "keywords": [],
   "author": "",

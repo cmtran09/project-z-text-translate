@@ -7,7 +7,7 @@ module.exports = {
 	entry: './frontend/src/App.js',
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve('./frontend/dist'),
+		path: path.resolve('./dist'),
 		publicPath: '/'
 		// publicPath: '/project-2-potterapi-pair/'
 	},
@@ -41,7 +41,7 @@ module.exports = {
 		new Dotenv(),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
-			template: 'src/index.html',
+			template: 'frontend/src/index.html',
 			filename: 'index.html',
 			inject: 'body'
 		})
