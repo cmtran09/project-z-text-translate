@@ -1,0 +1,30 @@
+// $primary-color: white;
+// $bg: black;
+// h1 {
+//   color: $primary-color;
+//   background-color: $bg;
+// }
+*{
+  // background-color: #EFF3ED;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cmtran09head {
+  font-size: 15px;
+  background: -webkit-linear-gradient(163deg, rgba(227,114,34,1) 0%, rgba(7,136,147,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 5px 0 100px 0
+}
+
+.main-app {
+  margin-left: 30px;
+  margin-right: 30px;
+} 
+
+.ui.button{
+  margin-left: 10px;
+}
