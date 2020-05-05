@@ -10,7 +10,7 @@
     "serve": "webpack-dev-server --mode=development",
     "build": "webpack -p",
     "deploy": "yarn build && gh-pages -d dist",
-    "start": "node ../backend/app.js"
+    "start": "node backend/app.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
