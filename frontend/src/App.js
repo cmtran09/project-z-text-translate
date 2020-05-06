@@ -56,11 +56,11 @@ const App = () => {
 
   return (
     <div>
-      <p className="cmtran09head">
+      <p className='cmtran09head'>
         Project Z - Text Translate
       </p>
 
-      <div className="main-app">
+      <div className='main-app'>
         <Grid columns={sentMessages.length < 1 ? 1 : 2} divided>
           <Grid.Row stretched>
             <Grid.Column>
@@ -70,7 +70,7 @@ const App = () => {
                     placeholder='Enter Phone Number'
                     name='number'
                     onChange={handleChange}
-                    label="Phone Number"
+                    label='Phone Number'
                     error={error && { content: 'Please enter a valid UK phone number including +44', pointing: 'below' }}
 
                   />
@@ -78,9 +78,9 @@ const App = () => {
                     placeholder='Enter Your Message'
                     name='message'
                     onChange={handleChange}
-                    label="Message"
+                    label='Message'
                   />
-                  <Dropdown onChange={handleChange} name='language' placeholder='select language' options={options} selection />
+                  <Dropdown onChange={handleChange} name='language' placeholder='Select Language' options={options} selection />
                   <Button type='submit'>Submit</Button>
                 </Form>
               </Segment>
