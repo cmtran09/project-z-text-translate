@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 5000
 const path = require('path')
-const dist = path.join(__dirname, '../frontend/dist')
+const dist = path.join(__dirname, '../dist')
 
 const router = require('./config/router')
 

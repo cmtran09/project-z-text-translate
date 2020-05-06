@@ -6,11 +6,11 @@
   "author": "cmtran09 <cmtran@hotmail.co.uk>",
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve:front": "webpack-dev-server --mode=development",
+    "test": "mocha backend/test/**/*_spec.js --require backend/test/helper --recursive --exit",
+    "seed": "node backend/db/seeds.js",
     "serve:back": "nodemon backend/app.js",
+    "serve:front": "webpack-dev-server --mode-development",
     "build": "webpack -p",
-    "deploy": "yarn build && gh-pages -d dist",
     "start": "node backend/app.js"
   },
   "dependencies": {
@@ -49,4 +49,3 @@
     "webpack-dev-server": "^3.10.3"
   }
 }
-
