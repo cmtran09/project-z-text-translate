@@ -4,7 +4,7 @@
 ## Overview
 Simple Full-stack application that can translate text and send it to any UK phone number.
 
-To see the deployed project navigate to to this address: https://project-z-text-translate.herokuapp.com/
+To see the deployed project navigate to this address: https://project-z-text-translate.herokuapp.com/
 
 ## Technologies Used
 * HTML
