@@ -6,6 +6,9 @@ Simple Full-stack application that can translate text and send it to any UK phon
 
 To see the deployed project navigate to this address: https://project-z-text-translate.herokuapp.com/
 
+See below for a quick demo of the application.
+![Demo](https://imgur.com/rAN3157.gif)
+
 ## Technologies Used
 * HTML
 * SCSS
